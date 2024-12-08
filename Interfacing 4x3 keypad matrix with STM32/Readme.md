@@ -1,7 +1,3 @@
-Here’s an updated **README.md** with your specified folder structure:
-
----
-
 # Interfacing a Keypad Matrix with STM32F401RETx  
 
 Welcome to the **Keypad Matrix Interfacing** project! This repository demonstrates how to interface a keypad matrix with the STM32F401RETx microcontroller, including setting up GPIOs, scanning the keypad, and visualizing outputs.
