@@ -1,4 +1,4 @@
-Here’s a **README.md** for your project on interfacing two seven-segment displays with STM32F401RETx for count display:
+
 
 ---
 
