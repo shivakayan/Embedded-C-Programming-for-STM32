@@ -55,8 +55,8 @@ The project is designed using **KEIL µVision** without the HAL library, ensurin
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/keypad-stm32.git
-   cd keypad-stm32
+   git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git
+   cd Embedded-C-Programming-for-STM32/Interfacing\ 4x3\ keypad\ matrix\ with\ STM32
    ```  
 
 2. Build the project:  
