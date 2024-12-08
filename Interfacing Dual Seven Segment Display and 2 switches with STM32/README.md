@@ -1,7 +1,3 @@
-
-
----
-
 # Interfacing Two Seven-Segment Displays with STM32F401RETx  
 
 This project demonstrates how to interface two seven-segment displays with the STM32F401RETx microcontroller. The displays are used to show a two-digit count, ranging from `00` to `99`, controlled by two switches for incrementing and decrementing the count.
