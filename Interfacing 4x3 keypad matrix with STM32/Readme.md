@@ -12,6 +12,9 @@ This project includes:
 - Simulating the design in **Proteus** for validation.  
 - Building and generating the final executable hex file for microcontroller programming.  
 
+For a detailed explanation of this project, watch the video here:  
+[📺 Keypad Interfacing with STM32](https://youtu.be/4dGZlm8M4IQ)  
+
 The project is designed using **KEIL µVision** without the HAL library, ensuring full control over the STM32 hardware.
 
 ---
