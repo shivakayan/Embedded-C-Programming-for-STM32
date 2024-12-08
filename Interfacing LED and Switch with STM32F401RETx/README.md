@@ -53,8 +53,9 @@ This project avoids HAL libraries, providing a clear understanding of low-level 
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/led-switch-interface.git
-   cd led-switch-interface
+   git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git
+   cd Embedded-C-Programming-for-STM32/Interfacing\ LED\ and\ Switch\ with\ STM32F401RETx
+
    ```  
 
 2. Build the project:  
