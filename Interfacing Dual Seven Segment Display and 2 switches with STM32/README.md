@@ -54,8 +54,9 @@ This project does not use any HAL libraries, allowing direct control over STM32 
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/seven-segment-stm32.git
-   cd seven-segment-stm32
+   git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git
+   cd Embedded-C-Programming-for-STM32/Interfacing\ Dual\ Seven\ Segment\ Display\ and\ 2\ switches\ with\ STM32
+
    ```  
 
 2. Build the project:  
