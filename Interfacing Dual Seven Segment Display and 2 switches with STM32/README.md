@@ -1,67 +1,113 @@
-# **Interfacing 2 Seven Segment Displays with STM32F401RET for Count Display**
+Here’s a **README.md** for your project on interfacing two seven-segment displays with STM32F401RETx for count display:
 
-This project demonstrates how to interface two 7-segment displays with the **STM32F401RET** microcontroller to display a 2-digit count. The count can be incremented and decremented using two switches. The count is shown in the **tens** and **ones** place, with each place represented by a 7-segment display.
+---
 
-## **Project Overview**
+# Interfacing Two Seven-Segment Displays with STM32F401RETx  
 
-- **MCU Used**: STM32F401RET
-- **Displays Used**: 2 x 7-segment displays
-- **Switches Used**: 2 switches for incrementing and decrementing the count
-- **Functionality**: The first display shows the tens digit, while the second displays the ones digit. The switches allow the user to increment and decrement the count, which is updated in real-time on the displays.
+This project demonstrates how to interface two seven-segment displays with the STM32F401RETx microcontroller. The displays are used to show a two-digit count, ranging from `00` to `99`, controlled by two switches for incrementing and decrementing the count.
 
-### **Key Features:**
-- **Increment and Decrement:** Use the switches to increment or decrement the 2-digit count.
-- **Real-time Display:** The 7-segment displays update immediately based on the switch actions.
-- **Direct GPIO Control:** The code directly manipulates GPIO registers to interface with the hardware, with no external libraries (i.e., no HAL).
+---
 
-## **Directory Structure**
+## 🚀 **Overview**  
 
+In this project:  
+- Two **seven-segment displays** are connected to STM32 GPIOs for displaying digits.  
+- Two **push-button switches** are used to increment or decrement the count.  
+- A custom implementation is provided for driving the displays and handling button inputs.  
 
-## **Code Explanation**
+This project does not use any HAL libraries, allowing direct control over STM32 registers for maximum flexibility and performance.
 
-This project is written in **Embedded C** for STM32 and utilizes direct register manipulation for GPIO control. Here's a breakdown of the code:
+---
 
-### **Code:**
+## 📂 **Folder Structure**  
 
-```c
-#include "stm32f401xe.h"
+```plaintext
+├── build/          # Contains the compiled hex files.
+├── docs/           # Tutorial PowerPoint presentation.
+├── simulations/    # Proteus simulation files for testing.
+├── src/            # C source code for the project.
+└── README.md       # Project documentation.
+```
 
-int main()
-{
-    int count = 0;
-    int num[10] = {0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X6F};
+### Folder Descriptions:  
 
-    // Enable the clock for GPIOA
-    RCC->AHB1ENR = 0X00000001;
+1. **`build/`**  
+   - Contains the compiled hex files for flashing the STM32 microcontroller.  
 
-    // Configure GPIO pins for 7-segment display and switches
-    GPIOA->MODER &= ~0XFFFFFFFF;  // Clear mode for all pins
-    GPIOA->MODER |= 0x05555555;   // Set alternate pins for 7-segment display
+2. **`docs/`**  
+   - Includes a PowerPoint presentation (`tutorial.pptx`) explaining the project setup, circuit design, and code logic.  
 
-    // Configure pull-up/down resistors for switches
-    GPIOA->PUPDR &= ~0XF0000000;
-    GPIOA->PUPDR |= 0X50000000;
+3. **`simulations/`**  
+   - Contains the Proteus simulation file (`count_display.pdsprj`) for testing the design before deploying on hardware.  
 
-    while (1)
-    {
-        // Check for increment switch (PA15)
-        if ((GPIOA->IDR & 0X00008000) == 0)
-        {
-            while ((GPIOA->IDR & 0X00008000) == 0);  // Wait until button is released
-            count++;
-            count %= 100;  // Keep count within 0-99
-            // Display count on 7-segment displays
-            GPIOA->ODR = num[(count / 10) % 10] << 7 | num[count % 10];
-        }
+4. **`src/`**  
+   - Includes the C source code (`main.c`) for driving the seven-segment displays and handling button inputs.
 
-        // Check for decrement switch (PA14)
-        if ((GPIOA->IDR & 0X00004000) == 0)
-        {
-            while ((GPIOA->IDR & 0X00004000) == 0);  // Wait until button is released
-            count = (count == 0) ? 0 : (count - 1);  // Prevent count from going negative
-            count %= 100;  // Keep count within 0-99
-            // Display updated count on 7-segment displays
-            GPIOA->ODR = num[(count / 10) % 10] << 7 | num[count % 10];
-        }
-    }
-}
+---
+
+## 🔧 **Tools Used**  
+
+- **Microcontroller:** STM32F401RETx  
+- **IDE:** KEIL µVision (without HAL)  
+- **Debugger/Programmer:** ST-Link  
+- **Simulation Software:** Proteus Design Suite  
+
+---
+
+## 📑 **How to Run**  
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/yourusername/seven-segment-stm32.git
+   cd seven-segment-stm32
+   ```  
+
+2. Build the project:  
+   - Open the `src/main.c` file in KEIL µVision.  
+   - Compile the code, and the hex file will be available in the `build/` folder.  
+
+3. Load the Proteus simulation:  
+   - Open the `.pdsprj` file in the `simulations/` folder using Proteus.  
+   - Run the simulation to visualize the increment and decrement functionality.  
+
+4. Flash the hex file to STM32:  
+   - Use ST-Link or a similar debugger/programmer to upload the hex file from the `build/` folder.  
+
+5. Connect hardware:  
+   - Follow the circuit diagram provided in the `docs/` folder to connect the seven-segment displays, switches, and STM32F401RETx.  
+   - Power on the circuit and test the functionality.  
+
+---
+
+## 📌 **Features**  
+
+- **Dual Seven-Segment Display:** Displays a two-digit count (00-99).  
+- **Increment and Decrement Control:**  
+  - **Switch 1 (PA15):** Increments the count.  
+  - **Switch 2 (PA14):** Decrements the count.  
+- **Direct Register Manipulation:** GPIOs configured without HAL for precise control.  
+- **Simulation-First Approach:** Proteus simulation ensures correctness before hardware implementation.  
+
+---
+
+## 🛠️ **Future Improvements**  
+
+- Implement a debounce mechanism for the switches to prevent false triggers.  
+- Add support for multiple modes (e.g., count up, count down, reset).  
+- Enhance the project with additional displays or communication protocols (e.g., UART to transmit the count).  
+
+---
+
+## 🤝 **Contributing**  
+
+Contributions are welcome! Fork this repository, make improvements, and submit a pull request. Let’s collaborate and innovate together. 🚀  
+
+---
+
+## 📜 **License**  
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.  
+
+---
+
+**Happy Coding and Innovating! 🚀**  
