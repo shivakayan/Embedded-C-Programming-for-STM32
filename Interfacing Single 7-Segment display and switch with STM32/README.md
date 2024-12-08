@@ -54,8 +54,9 @@ This project avoids HAL libraries, allowing a deeper understanding of low-level 
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/seven-segment-single-switch.git
-   cd seven-segment-single-switch
+   git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git
+   cd Embedded-C-Programming-for-STM32/Interfacing\ Single\ 7-Segment\ display\ and\ switch\ with\ STM32
+
    ```  
 
 2. Build the project:  
