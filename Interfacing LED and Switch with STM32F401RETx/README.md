@@ -11,7 +11,7 @@ In this project:
 - Direct register-level programming is used for precise control of GPIO pins on the STM32F401RETx microcontroller.  
 
 For a detailed explanation of this project, watch the video here:  
-[📺 Interfacing a single LED with a switch](https://www.youtube.com/watch?v=rJmUXE5hnBU)  
+[📺 Interfacing a single LED with a switch with STM32](https://www.youtube.com/watch?v=rJmUXE5hnBU)  
 
 This project avoids HAL libraries, providing a clear understanding of low-level microcontroller programming.
 
