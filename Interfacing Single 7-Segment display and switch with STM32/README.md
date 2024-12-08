@@ -1,59 +1,107 @@
-# STM32F401RETx Seven Segment Display and Increment Switch Interface
+# Interfacing a Single Seven-Segment Display with STM32F401RETx  
 
-This project demonstrates how to interface a **Seven Segment Display** and an **Increment Switch** with the **STM32F401RETx** microcontroller. The switch is used to increment a number displayed on the Seven Segment Display.
+This project demonstrates how to interface a single seven-segment display with the STM32F401RETx microcontroller. The display shows a single-digit count (`0` to `9`), which increments each time a connected switch is pressed.
 
-## Project Overview
+---
 
-- **MCU Used**: STM32F401RETx
-- **Peripheral Used**: GPIO (General Purpose Input/Output)
-- **Hardware**: A simple circuit with an increment switch connected to GPIO pin A8 and a Seven Segment Display connected to GPIO pins of STM32.
+## 🚀 **Overview**  
 
-### Key Features
-- The Seven Segment Display shows a decimal number (0-9).
-- The increment switch is used to increment the displayed number on the Seven Segment Display each time it is pressed.
-- The code uses STM32 hardware registers to configure the GPIO pins and implement the functionality.
+In this project:  
+- A **seven-segment display** is used to display numbers (`0` to `9`).  
+- A **push-button switch** increments the displayed number when pressed.  
+- Direct manipulation of STM32 registers ensures efficient and precise control.  
 
-## Directory Structure
+This project avoids HAL libraries, allowing a deeper understanding of low-level microcontroller programming.
 
-- **`src`**: Contains the source code files (`main.c`, etc.).
-- **`build`**: Contains compiled files like `.hex` or `.bin`.
-- **`docs`**: Documentation files (if any).
-- **`simulations`**: Contains Proteus simulation files for visual representation and simulation of the hardware.
+---
 
-## Code Explanation
+## 📂 **Folder Structure**  
 
-The provided code is written in **Embedded C** for STM32 and uses direct register manipulation to control the GPIO pins. Here’s a breakdown of how the code works:
+```plaintext
+├── build/          # Contains the compiled hex files.
+├── docs/           # Tutorial PowerPoint presentation.
+├── simulations/    # Proteus simulation files for testing.
+├── src/            # C source code for the project.
+└── README.md       # Project documentation.
+```
 
-### Code:
+### Folder Descriptions:  
 
-```c
-#include "stm32f401xe.h"
+1. **`build/`**  
+   - Contains the compiled hex file for flashing the STM32 microcontroller.  
 
-int main()
-{
-    int count = 0;
-    int num[10] = {0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X6F};
+2. **`docs/`**  
+   - Includes a PowerPoint presentation (`tutorial.pptx`) explaining the project’s circuit design, code structure, and implementation steps.  
 
-    // Enable clock for GPIOA
-    RCC->AHB1ENR = 0X00000001;
+3. **`simulations/`**  
+   - Contains the Proteus simulation file (`seven_segment_single_switch.pdsprj`) to test the design virtually before deploying to hardware.  
 
-    // Configure GPIOA pins for Seven Segment Display (A0-A7) as output
-    GPIOA->MODER &= ~0X00033FFF;   // Clear mode for A0-A7
-    GPIOA->MODER |= 0x00001555;    // Set A0-A7 as output
+4. **`src/`**  
+   - Includes the C source code (`main.c`) for driving the seven-segment display and reading the switch input.  
 
-    // Configure GPIOA pin A8 for input (switch)
-    GPIOA->PUPDR &= ~0X00030000;   // Clear pull-up/pull-down for A8
-    GPIOA->PUPDR |= 0X00010000;    // Set pull-down for A8
+---
 
-    while(1)
-    {
-        // Check if the switch is pressed (A8)
-        if ((GPIOA->IDR & 0X00000100) == 0)
-        {
-            while ((GPIOA->IDR & 0X00000100) == 0); // Wait until the switch is released
-            count++;
-            count %= 10;  // Ensure the count stays between 0 and 9
-            GPIOA->ODR = num[count];  // Update Seven Segment Display with the new number
-        }
-    }
-}
+## 🔧 **Tools Used**  
+
+- **Microcontroller:** STM32F401RETx  
+- **IDE:** KEIL µVision (without HAL)  
+- **Debugger/Programmer:** ST-Link  
+- **Simulation Software:** Proteus Design Suite  
+
+---
+
+## 📑 **How to Run**  
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/yourusername/seven-segment-single-switch.git
+   cd seven-segment-single-switch
+   ```  
+
+2. Build the project:  
+   - Open the `src/main.c` file in KEIL µVision.  
+   - Compile the code, and the hex file will be generated in the `build/` folder.  
+
+3. Load the Proteus simulation:  
+   - Open the `.pdsprj` file in the `simulations/` folder using Proteus.  
+   - Run the simulation to test the switch-controlled increment functionality.  
+
+4. Flash the hex file to STM32:  
+   - Use ST-Link or another compatible programmer to upload the hex file from the `build/` folder.  
+
+5. Connect hardware:  
+   - Follow the circuit diagram provided in the `docs/` folder to connect the seven-segment display, switch, and STM32F401RETx microcontroller.  
+   - Power on the circuit to test the functionality.  
+
+---
+
+## 📌 **Features**  
+
+- **Single Seven-Segment Display:** Displays numbers `0` to `9`.  
+- **Increment Functionality:** The count increments by `1` every time the switch is pressed.  
+- **Direct Register Access:** GPIOs are configured without HAL libraries for fine control.  
+- **Simulation-First Approach:** Proteus simulation ensures correctness before moving to hardware.  
+
+---
+
+## 🛠️ **Future Improvements**  
+
+- Add debounce logic for the switch to prevent unintended multiple increments.  
+- Expand the project to include decrement functionality with an additional switch.  
+- Implement power-saving modes to reduce energy consumption.  
+
+---
+
+## 🤝 **Contributing**  
+
+Contributions are welcome! Fork this repository, make your changes, and submit a pull request. Let’s learn and innovate together! 🚀  
+
+---
+
+## 📜 **License**  
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.  
+
+---
+
+**Happy Coding and Innovating! 🚀**  
