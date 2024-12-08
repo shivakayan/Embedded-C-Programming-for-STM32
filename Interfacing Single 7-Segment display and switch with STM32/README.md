@@ -11,6 +11,9 @@ In this project:
 - A **push-button switch** increments the displayed number when pressed.  
 - Direct manipulation of STM32 registers ensures efficient and precise control.  
 
+For a detailed explanation of this project, watch the video here:  
+[📺 Interfacing a Single Seven-Segment Display with STM32](https://www.youtube.com/watch?v=xv7Q4BSADHU)  
+
 This project avoids HAL libraries, allowing a deeper understanding of low-level microcontroller programming.
 
 ---
