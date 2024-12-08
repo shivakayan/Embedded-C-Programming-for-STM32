@@ -11,6 +11,9 @@ In this project:
 - Two **push-button switches** are used to increment or decrement the count.  
 - A custom implementation is provided for driving the displays and handling button inputs.  
 
+For a detailed explanation of this project, watch the video here:  
+[📺 Interfacing Two Seven-Segment Displays with STM32F401RETx ](https://www.youtube.com/watch?v=BwBmKcE__A8)  
+
 This project does not use any HAL libraries, allowing direct control over STM32 registers for maximum flexibility and performance.
 
 ---
