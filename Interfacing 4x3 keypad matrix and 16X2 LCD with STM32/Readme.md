@@ -74,7 +74,6 @@ You're absolutely right! The correct command should indeed include navigating to
 
 - **STM32F401RE Datasheet**: [STMicroelectronics STM32F401RE Datasheet](https://www.st.com/resource/en/datasheet/stm32f401re.pdf)
 - **16x2 LCD Datasheet**: [Hitachi LCD Datasheet](https://bitsavers.trailing-edge.com/components/hitachi/_dataBooks/CE-E573Q_Hitachi_Dot_Matrix_Liquid_Crystal_Display.pdf)
-- **4x3 Keypad Datasheet**: [Matrix Keypad Datasheet](https://www.handsontec.com/dataspecs/4x3%20Keypad.pdf)
 
 ---
 
