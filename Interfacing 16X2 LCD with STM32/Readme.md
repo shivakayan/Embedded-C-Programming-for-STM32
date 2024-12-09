@@ -1,118 +1,111 @@
-Embedded-C-Programming-for-STM32
-Interfacing 16x2 LCD with STM32
-Welcome to the "Interfacing 16x2 LCD with STM32" project repository! 🎉 This project demonstrates how to interface a 16x2 character LCD module with the STM32F401RE microcontroller using Embedded C programming. The project includes all essential files for development, simulation, and testing, making it an excellent resource for embedded system enthusiasts.
+# Interfacing 16X2 LCD with STM32  
 
-📂 Repository Structure
-The repository is organized into the following folders for better accessibility:
+Welcome to the **16X2 LCD Interfacing** project! This repository demonstrates how to interface a 16X2 LCD with the STM32F401RETx microcontroller, including GPIO setup, initializing the LCD, and displaying custom messages.
 
-docs/
-Contains a detailed presentation explaining the project.
+---
 
-project-presentation.pptx
-build/
-Contains the compiled hex file for the project.
+## 🚀 **Overview**  
 
-lcd_project.hex
-src/
-Contains the Embedded C source code for the project.
+This project includes:  
+- Configuring STM32 GPIOs to drive a **16X2 LCD** in 8-bit mode.  
+- Writing efficient **Embedded C code** to initialize and control the LCD.  
+- Simulating the design in **Proteus** for validation.  
+- Building and generating the final executable hex file for microcontroller programming.  
 
-lcd_project.c
-simulations/
-Contains the Proteus simulation files for testing the project virtually.
+For a detailed walkthrough of this project, watch the video here:  
+[📺 Interfacing 16X2 LCD with STM32](https://youtu.be/OjIxOUQvCFs)  
 
-lcd_project.pdsprj
-✨ Features
-Efficient interfacing of a 16x2 LCD with STM32F401RE microcontroller.
-Includes GPIO configuration for LCD control and data pins.
-Implements key LCD commands like initialization, sending data, and clearing the display.
-Proteus simulation for validating functionality before hardware implementation.
-Beginner-friendly, with clear and reusable Embedded C code.
-🔧 How to Use
-Clone the Repository:
+The project is implemented using **KEIL µVision** without HAL libraries, ensuring direct control over hardware.
 
-bash
-Copy code
-git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git  
-cd Embedded-C-Programming-for-STM32/Interfacing 16X2 LCD with STM32  
-Required Tools:
+---
 
-STM32CubeIDE or KEIL µVision (for code development).
-Proteus Design Suite (for simulation).
-Steps to Run:
+## 📂 **Folder Structure**  
 
-Open the source code from the src/ folder in your preferred IDE.
-Load the lcd_project.hex file into Proteus simulation from the build/ folder.
-Connect the LCD and STM32 model as per the schematic in the Proteus file.
-🖥️ Code Overview
-Here’s the core C code for this project:
+```plaintext
+├── build/          # Contains the compiled hex files.
+├── docs/           # Tutorial PowerPoint presentation.
+├── simulations/    # Proteus simulation files for testing.
+├── src/            # C source code for the project.
+└── README.md       # Project documentation.
+```
 
-c
-Copy code
-#include "stm32f401xe.h"  
-void MSDelay(unsigned int);  
-void lcdprint(char);  
-void lcdinit(void);  
-void sendcmd(char);  
-void printstr(char*);  
+### Folder Descriptions:  
 
-void MSDelay(unsigned int Times) {  
-    unsigned int i, j;  
-    for (i = 0; i < Times; i++) {  
-        for (j = 0; j < 1400; j++);  
-    }  
-}  
+1. **`build/`**  
+   - Contains the compiled hex files to program the STM32 microcontroller.  
 
-void lcdprint(char ch) {  
-    GPIOA->ODR &= ~0XFF03;  
-    GPIOA->ODR |= ch << 8;  
-    GPIOA->ODR |= 0x01;  // RS high for data  
-    GPIOA->ODR |= 0x02;  // Enable high  
-    MSDelay(5);  
-    GPIOA->ODR &= ~0x0002;  // Enable low  
-}  
+2. **`docs/`**  
+   - Includes a PowerPoint presentation (`tutorial.pptx`) explaining the project, including circuit setup and code implementation.
 
-void sendcmd(char ch) {  
-    GPIOA->ODR &= ~0XFF03;  
-    GPIOA->ODR |= ch << 8;  
-    GPIOA->ODR &= ~0x01;  // RS low for command  
-    GPIOA->ODR |= 0x02;  // Enable high  
-    MSDelay(5);  
-    GPIOA->ODR &= ~0x0002;  // Enable low  
-}  
+3. **`simulations/`**  
+   - Contains Proteus simulation files to test the LCD interface before hardware deployment.  
 
-void lcdinit(void) {  
-    sendcmd(0x38);  // 16x2 mode  
-    sendcmd(0x0F);  // Display on, cursor blinking  
-    sendcmd(0x06);  // Auto increment  
-    sendcmd(0x01);  // Clear display  
-}  
+4. **`src/`**  
+   - Contains the C source code (`main.c`) to initialize the LCD and display custom messages.  
 
-void printstr(char *ch) {  
-    int i;  
-    for (i = 0; ch[i] != '\0'; i++) {  
-        lcdprint(ch[i]);  
-    }  
-}  
+---
 
-int main() {  
-    RCC->AHB1ENR = 1;  
-    GPIOA->MODER &= ~0XFFFF000F;  
-    GPIOA->MODER |= 0X55550005;  
-    lcdinit();  
-    sendcmd(0x80);  
-    printstr("   Welcome to   ");  
-    sendcmd(0xc0);  
-    printstr("   TechTalks!   ");  
-    while (1);  
-}  
-🎥 Video Tutorial
-For a step-by-step explanation of this project, check out my YouTube video:
-Interfacing 16x2 LCD with STM32
+## 🔧 **Tools Used**  
 
-🌟 Contribution
-Feel free to contribute to this repository by creating pull requests for improvements or additional features.
+- **Microcontroller:** STM32F401RETx  
+- **IDE:** KEIL µVision (without HAL)  
+- **Debugger/Programmer:** ST-Link  
+- **Simulation Software:** Proteus Design Suite  
 
-📬 Contact
-Have questions or suggestions? Drop a comment on the YouTube video or reach out via GitHub.
+---
 
-Happy Coding! 🚀
+## 📑 **How to Run**  
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/shivakayan/Embedded-C-Programming-for-STM32.git
+   cd Embedded-C-Programming-for-STM32/Interfacing\ 16X2\ LCD\ with\ STM32
+   ```  
+
+2. Build the project:  
+   - Open the `src/main.c` file in KEIL µVision.  
+   - Compile the code and locate the hex file in the `build/` folder.  
+
+3. Load the Proteus simulation:  
+   - Open the `.pdsprj` file in the `simulations/` folder using Proteus.  
+   - Run the simulation and observe the LCD functionality.  
+
+4. Flash the hex file to STM32:  
+   - Use ST-Link or a similar debugger/programmer to upload the hex file from the `build/` folder.  
+
+5. Connect hardware:  
+   - Follow the circuit diagram provided in the `docs/` folder to connect the LCD and STM32F401RETx.  
+   - Power on the circuit and test the LCD functionality.  
+
+---
+
+## 📌 **Features**  
+
+- **LCD Initialization:** Configures the LCD for 8-bit mode, enabling robust display control.  
+- **Custom Message Display:** Demonstrates how to send strings and characters to the LCD.  
+- **Simulation-First Workflow:** Ensures the project works in simulation before hardware deployment.  
+- **Flexible Design:** Easily adaptable for other LCD sizes and configurations.  
+
+---
+
+## 🛠️ **Future Improvements**  
+
+- Add support for 4-bit mode operation to reduce GPIO usage.  
+- Interface the LCD with a keypad or other input devices.  
+- Display real-time data such as sensor readings on the LCD.  
+
+---
+
+## 🤝 **Contributing**  
+
+Contributions are welcome! Fork this repository, make improvements, and submit a pull request. Let’s innovate together. 🚀  
+
+---
+
+## 📜 **License**  
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.  
+
+---
+
+**Happy Coding and Innovating! 🚀**  
